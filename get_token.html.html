@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Divya Collection - Get Token</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #0b132b; color: white; text-align: center; padding: 20px; }
+        nav { margin-bottom: 40px; }
+        nav a { color: #00b4d8; margin: 15px; text-decoration: none; font-size: 18px; font-weight: bold; }
+        .card { background: #1c2541; padding: 40px; border-radius: 15px; display: inline-block; width: 85%; max-width: 500px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); margin-top: 40px; }
+        h2 { font-size: 28px; margin-bottom: 30px; color: white; }
+        input[type="text"] { width: 90%; padding: 12px; margin: 12px 0; border: none; border-radius: 8px; font-size: 16px; background: #cbd5e1; color: #0b132b; }
+        input[type="text"]:focus { outline: 2px solid #00b4d8; }
+        .btn { background: #00b4d8; color: white; padding: 12px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; width: 95%; margin-top: 15px; }
+        .btn:hover { background: #0077b6; }
+        .success-box { font-size: 22px; color: #4ade80; font-weight: bold; margin-bottom: 15px; }
+        .token-no { font-size: 48px; color: #00b4d8; font-weight: bold; margin: 20px 0; }
+        p.msg { color: #cbd5e1; font-size: 14px; margin-bottom: 25px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/">Home</a> | <a href="/products">Our Collection</a> | <a href="/get-token">Get Token</a> | <a href="/contact">Contact Us</a> | <a href="/admin">Admin</a>
+    </nav>
+
+    <div class="card">
+        {% if success %}
+            <div class="success-box">🎉 Token Generated Successfully!</div>
+            <div class="token-no">#{{ token_no }}</div>
+            <p class="msg">You will receive a WhatsApp message shortly.</p>
+            <a href="/get-token" class="btn" style="text-decoration: none; display: inline-block; width: auto;">Book Another Token</a>
+        {% else %}
+            <h2>Get Your Entry Token</h2>
+            <form action="/get-token" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="text" name="phone" placeholder="WhatsApp Number" required>
+                <button type="submit" class="btn">Generate Token</button>
+            </form>
+        {% endif %}
+    </div>
+
+</body>
+</html>

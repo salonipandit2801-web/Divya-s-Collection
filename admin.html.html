@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - {{ shop.name if shop else 'Divya Collection' }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #0b132b; color: white; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        h1 { color: #4cc9f0; }
+        .container { display: flex; gap: 30px; width: 100%; max-width: 1000px; margin-top: 20px; }
+        .card { background-color: #1c2541; padding: 30px; border-radius: 15px; flex: 1; text-align: center; }
+        .token-display { font-size: 3.5rem; font-weight: bold; color: #4cc9f0; margin: 20px 0; }
+        .btn { background-color: #4cc9f0; color: #0b132b; border: none; padding: 12px 30px; font-weight: bold; border-radius: 25px; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 15px; }
+        .queue-list { list-style: none; padding: 0; text-align: left; }
+        .queue-item { background-color: #3a06ff; padding: 12px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+
+    <h1>{{ shop.name if shop else 'Divya Collection' }} - Admin Panel</h1>
+
+    <div class="container">
+        <div class="card">
+            <h2>Current Active Token</h2>
+            {% if active_token %}
+                <div class="token-display">#{{ active_token.token }}</div>
+                <h3>{{ active_token.name }}</h3>
+                <p>{{ active_token.phone }}</p>
+            {% else %}
+                <div class="token-display" style="color: #ff007f;">No Active Token</div>
+            {% endif %}
+            
+            <a href="/next-person" class="btn">Next Person</a>
+        </div>
+
+        <div class="card">
+            <h2>Waiting Queue</h2>
+            {% if tokens %}
+                <ul class="queue-list">
+                    {% for next in tokens %}
+                        <li class="queue-item">
+                            <span>{{ next.name }}</span>
+                            <strong>#{{ next.token }}</strong>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p style="color: #a5a5a5;">No one is waiting in queue.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
